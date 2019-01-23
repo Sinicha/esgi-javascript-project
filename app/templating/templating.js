@@ -31,10 +31,13 @@ export default class Templating {
                 if (events.hasOwnProperty(k)) {
                     let obj = events[k];
                     if (obj != null && typeof obj == 'object') {
-                        if (obj.hasOwnProperty('type') && obj.hasOwnProperty('callback')) {
+                        if (obj.hasOwnProperty('type')
+                            && obj.hasOwnProperty('callback')
+                            && obj.hasOwnProperty('path')) {
                             let element = document.getElementById(k);
-                            if(element != null) {
+                            if (element != null) {
                                 element.addEventListener(obj['type'], obj['callback']);
+                                element.routePath = obj['path'];
                             }
                         }
                     }

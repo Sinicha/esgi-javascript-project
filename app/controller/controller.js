@@ -1,6 +1,7 @@
 import {HomeController} from "./controllers/home.js"
 import {LoginController} from "./controllers/login.js";
 import Templating from "../templating/templating.js";
+import Routing from "../routing/routing.js";
 
 /**
  * This class use for templating page
@@ -18,18 +19,24 @@ export default class Controller {
         if (controller == "home") {
             view = HomeController.callView();
             vars = {'username': 'toto'};
-            let route = function() {
-                console.log("Test");
-            }
-            events = {'login': {'type': 'click', 'callback': route}};
         } else if (controller == "login") {
-            return LoginController.callView();
+            view = LoginController.callView();
         } else {
-            return "<div>The asked resources does't exist.</div>";
+            view = Error404Controller.callView();
         }
 
-        // Render
-        Templating.render("<nav><ul><li><button>Accueil</button></li><li><button id='login'>Login</button></li></ul></ul></nav>", {});
+        // Render Menu
+        events['home'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'home'};
+        events['login'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login'};
+        Templating.render("<nav><ul><li><button id='home'>Accueil</button></li><li><button id='login'>Login</button></li></ul></ul></nav>", vars);
+
+        // Render View
         Templating.render(view, vars, events);
+    }
+
+    static setRouteCallback(e) {
+        let routePath = e.target.routePath
+        console.log("setRouteCallback", routePath)
+        Routing.route(routePath);
     }
 }

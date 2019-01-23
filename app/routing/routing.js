@@ -11,16 +11,27 @@ export default class Routing {
 
     }
 
-    static route() {
+    static route(path) {
         // Get URL
-        let route = window.location.pathname.replace(config.rootUrl + "/", '');
+        let route = '';
+        if(typeof path == "string") {
+            route = path;
+            console.log("path", path)
+        } else {
+            window.location.pathname.replace(config.rootUrl + "/", '');
+        }
+
+        // Clear Root in Dom
+        document.getElementById('root').innerHTML = "";
 
         // Find the asked view
         let view = null;
-        if (route == "" || route == "index" || route == "index.html") {
+        if (route == "" || route == "home" || route == "index" || route == "index.html") {
             Controller.doController('home')
+        } else if (route == "login") {
+            Controller.doController('login')
         } else {
-            view = View.getView("404");
+            Controller.doController('error404')
         }
     }
 }
