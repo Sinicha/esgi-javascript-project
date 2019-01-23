@@ -1,5 +1,51 @@
 /* This is the main CSS style for Escape Room Manager Project */
 html, * {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
+
+/* Start Menu */
+nav {
+    display: block;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+nav li {
+    float: left;
+}
+
+nav li button {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border: none;
+    background-color: #333;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+nav li button:hover:not(.active) {
+    background-color: #4CAF50;
+}
+
+nav .active {
+    background-color: #4CAF50;
+}
+/* End Menu */
+
+/* Content */
+section {
+    padding: 0 120px;
+}
+/* End Content */
