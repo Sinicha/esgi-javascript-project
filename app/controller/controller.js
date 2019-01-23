@@ -1,6 +1,6 @@
 import {HomeController} from "./controllers/home.js"
-import {login} from "./controllers/login.js"
-import {error404} from "../view/views/error404.js"
+import {LoginController} from "./controllers/login.js";
+import {Error404Controller} from "./controllers/error404.js"
 import Templating from "../templating/templating.js";
 
 /**
@@ -17,7 +17,7 @@ export default class Controller {
         if (controller == "home") {
             view = HomeController.callView();
         } else if (controller == "login") {
-            return "login";
+            return LoginController.callView();
         } else {
             return "<div>The asked resources does't exist.</div>";
         }
