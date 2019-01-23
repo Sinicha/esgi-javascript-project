@@ -1,3 +1,3 @@
 export function home() {
-    return "<section>Home Page</section>";
+    return "<section>Home Page Bienvenue ${username}</section>";
 }

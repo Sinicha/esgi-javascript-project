@@ -1,6 +1,5 @@
 import {HomeController} from "./controllers/home.js"
 import {LoginController} from "./controllers/login.js";
-import {Error404Controller} from "./controllers/error404.js"
 import Templating from "../templating/templating.js";
 
 /**
@@ -14,8 +13,15 @@ export default class Controller {
 
     static doController(controller) {
         let view = null;
+        let vars = {};
+        let events = {};
         if (controller == "home") {
             view = HomeController.callView();
+            vars = {'username': 'toto'};
+            let route = function() {
+                console.log("Test");
+            }
+            events = {'login': {'type': 'click', 'callback': route}};
         } else if (controller == "login") {
             return LoginController.callView();
         } else {
@@ -23,7 +29,7 @@ export default class Controller {
         }
 
         // Render
-        Templating.render("<nav><ul><li><button>Accueil</button></li><li><button>Login</button></li></ul></ul></nav>", {});
-        Templating.render(view, {});
+        Templating.render("<nav><ul><li><button>Accueil</button></li><li><button id='login'>Login</button></li></ul></ul></nav>", {});
+        Templating.render(view, vars, events);
     }
 }
