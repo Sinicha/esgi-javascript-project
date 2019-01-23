@@ -30,7 +30,9 @@ export default class Routing {
             Controller.doController('home')
         } else if (route == "login") {
             Controller.doController('login')
-        } else {
+        } else if (route == "reservation") {
+            Controller.doController('reservation')
+        }else {
             Controller.doController('error404')
         }
     }

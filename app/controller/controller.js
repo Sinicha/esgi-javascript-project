@@ -1,5 +1,6 @@
-import {HomeController} from "./controllers/home.js"
-import {LoginController} from "./controllers/login.js";
+import {HomeController} from "./controllers/homeController.js"
+import {LoginController} from "./controllers/loginController.js";
+import {ReservationController} from "./controllers/reservationController.js";
 import Templating from "../templating/templating.js";
 import Routing from "../routing/routing.js";
 
@@ -21,14 +22,17 @@ export default class Controller {
             vars = {'username': 'toto'};
         } else if (controller == "login") {
             view = LoginController.callView();
-        } else {
+        } else if (controller == "reservation") {
+            view = ReservationController.callView();
+        }else {
             view = Error404Controller.callView();
         }
 
         // Render Menu
         events['home'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'home'};
         events['login'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login'};
-        Templating.render("<nav><ul><li><button id='home'>Accueil</button></li><li><button id='login'>Login</button></li></ul></ul></nav>", vars);
+        events['reservation'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'reservation'};
+        Templating.render("<nav><ul><li><button id='home'>Accueil</button></li><li><button id='login'>Login</button></li><li><button id='reservation'>Reservation</button></li></ul></nav>", vars);
 
         // Render View
         Templating.render(view, vars, events);
