@@ -16,7 +16,6 @@ export default class Routing {
         let route = '';
         if(typeof path == "string") {
             route = path;
-            console.log("path", path)
         } else {
             window.location.pathname.replace(config.rootUrl + "/", '');
         }
@@ -30,6 +29,8 @@ export default class Routing {
             Controller.doController('home')
         } else if (route == "login") {
             Controller.doController('login')
+        } else if (route == "signup") {
+            Controller.doController('signup')
         } else {
             Controller.doController('error404')
         }
