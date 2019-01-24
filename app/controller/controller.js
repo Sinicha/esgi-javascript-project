@@ -3,7 +3,7 @@ import {LoginController} from "./controllers/loginController.js";
 import {ReservationController} from "./controllers/reservationController.js";
 import Templating from "../templating/templating.js";
 import Routing from "../routing/routing.js";
-import {Error404Controller} from "./controllers/error404.js";
+import {Error404Controller} from "./controllers/error404Controller.js";
 import {SignupController} from "./controllers/signupController.js";
 
 /**
@@ -27,9 +27,9 @@ export default class Controller {
             view = LoginController.callView();
         } else if (controller === "login_form") {
             //view = LoginController.loginUser();
-        } else if (controller == "reservation") {
+        } else if (controller === "reservation") {
             view = ReservationController.callView();
-        } else if (controller == "signup") {
+        } else if (controller === "signup") {
             view = SignupController.callView();
         } else {
             view = Error404Controller.callView();

@@ -28,14 +28,12 @@ export default class Routing {
         // Get URL
         let route = '';
         let formData = document.getElementById('login_form_container');
-
         if(typeof path == "string") {
             route = path;
 
             if (route === 'login_form') {
                 let form = this.getForm(formData).then((result) => {
                     if (result != null && result !== "Failed") {
-                        //console.log("Valeur", result);
                         FormHelper.getLoginFormValue(result)
                     } else {
                         console.log("Une erreur est survenue")
