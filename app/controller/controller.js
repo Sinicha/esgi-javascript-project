@@ -18,15 +18,17 @@ export default class Controller {
         let view = null;
         let vars = {};
         let events = {};
+
         if (controller === "home") {
             view = HomeController.callView();
             vars = {'username': 'toto'};
         } else if (controller === "login") {
             view = LoginController.callView();
-        }
-        else if (controller === "signup") {
+        } else if (controller === "login_form") {
+            //view = LoginController.loginUser();
+        } else if (controller === "signup") {
             view = SignupController.callView();
-        }else {
+        } else {
             view = Error404Controller.callView();
         }
 
@@ -35,6 +37,7 @@ export default class Controller {
         events['login'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login'};
         events['signup'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'signup'};
 
+        events['login_form'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login_form'};
 
         Templating.render("<nav><ul><li><button id='home'>Accueil</button></li><li><button id='login'>Login</button></li><li><button id='signup'>Inscription</button></li></ul></ul></nav>", vars);
 
@@ -43,7 +46,7 @@ export default class Controller {
     }
 
     static setRouteCallback(e) {
-        let routePath = e.target.routePath
+        let routePath = e.target.routePath;
 
         Routing.route(routePath);
     }
