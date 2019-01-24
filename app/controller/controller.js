@@ -3,7 +3,7 @@ import {LoginController} from "./controllers/loginController.js";
 import {ReservationController} from "./controllers/reservationController.js";
 import Templating from "../templating/templating.js";
 import Routing from "../routing/routing.js";
-import {Error404Controller} from "./controllers/error404.js";
+import {Error404Controller} from "./controllers/error404Controller.js";
 import {SignupController} from "./controllers/signupController.js";
 
 /**
@@ -19,14 +19,20 @@ export default class Controller {
         let view = "";
         let vars = {};
         let events = {};
-        if (controller == "home") {
+
+        if (controller === "home") {
             view = HomeController.callView();
             vars = {'username': 'toto'};
-        } else if (controller == "login") {
+        } else if (controller === "login") {
             view = LoginController.callView();
-        } else if (controller == "reservation") {
+        } else if (controller === "login_form") {
+            LoginController.loginUser()
+            view = HomeController.callView();
+        } else if (controller === "signup_form") {
+            view = HomeController.callView();
+        } else if (controller === "reservation") {
             view = ReservationController.callView();
-        } else if (controller == "signup") {
+        } else if (controller === "signup") {
             view = SignupController.callView();
         } else {
             view = Error404Controller.callView();
@@ -37,15 +43,19 @@ export default class Controller {
         events['login'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login'};
         events['reservation'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'reservation'};
         events['signup'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'signup'};
-        Templating.render("<nav><ul><li><button id='home'>Accueil</button></li><li><button id='login'>Login</button></li><li><button id='reservation'>Reservation</button></li><li><button id='signup'>Inscription</button></li></ul></nav>", vars);
 
+        // Form
+        events['login_form'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login_form'};
+        events['signup_form'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'signup_form'};
+
+        Templating.render("<nav><ul><li><button id='home'>Accueil</button></li><li><button id='reservation'>Reservation</button></li><li><button id='login'>Login</button></li><li><button id='signup'>Inscription</button></li></ul></ul></nav>", vars);
 
         // Render View
         Templating.render(view, vars, events);
     }
 
     static setRouteCallback(e) {
-        let routePath = e.target.routePath
+        let routePath = e.target.routePath;
 
         Routing.route(routePath);
     }

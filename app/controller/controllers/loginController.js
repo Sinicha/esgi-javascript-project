@@ -6,4 +6,7 @@ export class LoginController {
         return login();
     }
 
+    static loginUser(formData) {
+
+    }
 }
