@@ -93,7 +93,7 @@ section {
 }*/
 .box {
     height: 140px;
-    line-height: 140px;
+    line-height: 55px;
     vertical-align: middle;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
