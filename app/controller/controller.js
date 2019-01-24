@@ -26,6 +26,7 @@ export default class Controller {
         } else if (controller === "login") {
             view = LoginController.callView();
         } else if (controller === "login_form") {
+            LoginController.loginUser()
             view = HomeController.callView();
         } else if (controller === "signup_form") {
             view = HomeController.callView();

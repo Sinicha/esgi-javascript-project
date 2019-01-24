@@ -1,7 +1,7 @@
 import Controller from "../controller/controller.js";
-import View from "../view/view.js";
 import {config} from "../configuration/config.js";
 import FormHelper from "../helper/FormHelper.js";
+import {SignupController} from "../controller/controllers/signupController.js";
 
 /**
  * This class use for routing
@@ -45,7 +45,7 @@ export default class Routing {
             } else if (route === 'signup_form') {
                 this.getForm(formData).then((result) => {
                     if (result != null && result !== "Failed") {
-                        FormHelper.getSignUpFormValue(result)
+                        SignupController.signupUser(FormHelper.getSignUpFormValue(result))
                     } else {
                         console.log("Une erreur est survenue")
                     }

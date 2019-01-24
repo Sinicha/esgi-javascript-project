@@ -1,5 +1,4 @@
 import {login} from "../../view/views/login.js"
-import FormHelper from "../../helper/FormHelper.js";
 
 export class LoginController {
 
@@ -7,6 +6,7 @@ export class LoginController {
         return login();
     }
 
-    static loginUser() {
+    static loginUser(formData) {
+
     }
 }
