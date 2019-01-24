@@ -27,14 +27,25 @@ export default class Routing {
     static route(path) {
         // Get URL
         let route = '';
-        let formData = document.getElementById('login_form_container');
+        // Get all form
+        let formData = document.querySelector('[id*="form_container"]');
+
         if(typeof path == "string") {
             route = path;
 
+            // TODO refactor
             if (route === 'login_form') {
-                let form = this.getForm(formData).then((result) => {
+                this.getForm(formData).then((result) => {
                     if (result != null && result !== "Failed") {
                         FormHelper.getLoginFormValue(result)
+                    } else {
+                        console.log("Une erreur est survenue")
+                    }
+                });
+            } else if (route === 'signup_form') {
+                this.getForm(formData).then((result) => {
+                    if (result != null && result !== "Failed") {
+                        FormHelper.getSignUpFormValue(result)
                     } else {
                         console.log("Une erreur est survenue")
                     }
@@ -59,6 +70,8 @@ export default class Routing {
             Controller.doController('signup')
         } else if (route === "login_form") {
             Controller.doController('login_form')
+        } else if (route === "signup_form") {
+            Controller.doController('signup_form')
         } else {
             Controller.doController('error404')
         }

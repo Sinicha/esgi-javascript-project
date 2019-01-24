@@ -26,7 +26,9 @@ export default class Controller {
         } else if (controller === "login") {
             view = LoginController.callView();
         } else if (controller === "login_form") {
-            //view = LoginController.loginUser();
+            view = HomeController.callView();
+        } else if (controller === "signup_form") {
+            view = HomeController.callView();
         } else if (controller === "reservation") {
             view = ReservationController.callView();
         } else if (controller === "signup") {
@@ -41,7 +43,9 @@ export default class Controller {
         events['reservation'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'reservation'};
         events['signup'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'signup'};
 
+        // Form
         events['login_form'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login_form'};
+        events['signup_form'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'signup_form'};
 
         Templating.render("<nav><ul><li><button id='home'>Accueil</button></li><li><button id='reservation'>Reservation</button></li><li><button id='login'>Login</button></li><li><button id='signup'>Inscription</button></li></ul></ul></nav>", vars);
 
