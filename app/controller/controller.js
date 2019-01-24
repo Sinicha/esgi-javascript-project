@@ -18,13 +18,13 @@ export default class Controller {
         let view = null;
         let vars = {};
         let events = {};
-        if (controller == "home") {
+        if (controller === "home") {
             view = HomeController.callView();
             vars = {'username': 'toto'};
-        } else if (controller == "login") {
+        } else if (controller === "login") {
             view = LoginController.callView();
         }
-        else if (controller == "signup") {
+        else if (controller === "signup") {
             view = SignupController.callView();
         }else {
             view = Error404Controller.callView();
