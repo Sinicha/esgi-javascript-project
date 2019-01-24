@@ -83,3 +83,36 @@ section {
 }
 
 /* End Title */
+
+/* Reservation page*/
+/*.carre {
+    width:100px;
+    height:100px;
+    background:blue;
+    margin:10px auto;
+}*/
+.box {
+    height: 140px;
+    line-height: 140px;
+    vertical-align: middle;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px 2em;
+}
+
+.box :first-child {
+    align-self: center;
+}
+
+div.inthebox {
+  width: 80%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+div.container {
+  text-align: center;
+  padding: 10px 20px;
+}
+/* End Reservation*/
