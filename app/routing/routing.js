@@ -29,6 +29,8 @@ export default class Routing {
             Controller.doController('home')
         } else if (route == "login") {
             Controller.doController('login')
+        } else if (route == "reservation") {
+            Controller.doController('reservation')
         } else if (route == "signup") {
             Controller.doController('signup')
         } else {
