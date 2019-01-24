@@ -13,7 +13,7 @@ export default class Controller {
     }
 
     static doController(controller) {
-        let view = null;
+        let view = "";
         let vars = {};
         let events = {};
         if (controller == "home") {
