@@ -35,6 +35,10 @@ nav li button {
     cursor: pointer;
 }
 
+nav li button:focus {
+    outline: transparent;
+}
+
 nav li button:hover:not(.active) {
     background-color: #4CAF50;
 }
@@ -49,3 +53,33 @@ section {
     padding: 0 120px;
 }
 /* End Content */
+
+/* Start Form */
+.container-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-form {
+    width: 300px;
+    padding: 5px;
+    margin: 8px auto;
+    border-radius: 2px;
+    border: 1px solid #b9b6b6;
+}
+
+.form-submit {
+    background-color: transparent;
+}
+
+/* End Form */
+
+/* Start Title */
+
+.h1-title {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* End Title */
