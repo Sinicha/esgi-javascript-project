@@ -20,7 +20,7 @@ export class LoginController {
     static post(formLogin) {
         let user = (new User()).filter({'email': {'op': '==', 'value': formLogin.email}});
         if(user !== null && Array.isArray(user) && user.length === 1 && user[0]['password'] === formLogin.password) {
-            AuthenticationHelper.setAuthenticate(true);
+            AuthenticationHelper.setAuthenticate(user[0]);
             Routing.route('home');
         } else {
             // Create menu bar

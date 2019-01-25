@@ -11,7 +11,8 @@ export class HomeController {
 
         let params = {};
         if(AuthenticationHelper.getAuthenticate()) {
-            params['username'] = 'John Doe';
+            console.log("user", AuthenticationHelper.getUser())
+            params['username'] = AuthenticationHelper.getUser()['last_name'];
         }
 
         // Render View

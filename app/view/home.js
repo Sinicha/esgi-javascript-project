@@ -7,7 +7,7 @@ export function home() {
         </section>`;
     } else {
         return `<section>
-            Home Page
+            "Les jeux d'évasion sont un type de jeu grandeur nature constituant la déclinaison physique des jeux vidéo de type « escape the room ».", Wikipédia
         </section>`;
     }
 }
