@@ -23,6 +23,10 @@ export class LoginController {
             AuthenticationHelper.setAuthenticate(true);
             Routing.route('home');
         } else {
+            // Create menu bar
+            createMenu();
+
+            // Render View
             let events = {};
             events['login_form'] = {'type': 'click', 'callback': Routing.setRouteCallback, 'path': 'login_form'};
             return Templating.render(login("Erreur d'authentification."), {}, events);
