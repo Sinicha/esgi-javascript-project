@@ -1,7 +1,13 @@
-import Controller from "../controller/controller.js";
 import {config} from "../configuration/config.js";
 import FormHelper from "../helper/FormHelper.js";
-import {SignupController} from "../controller/controllers/signupController.js";
+import {SignupController} from "../controller/signupController.js";
+import Templating from "../templating/templating.js";
+import {HomeController} from "../controller/homeController.js";
+import {LoginController} from "../controller/loginController.js";
+import {ReservationController} from "../controller/reservationController.js";
+import {Error404Controller} from "../controller/error404Controller.js";
+import AuthenticationHelper from "../helper/AuthenticationHelper.js";
+import {LogoutController} from "../controller/logoutController.js";
 
 /**
  * This class use for routing
@@ -30,27 +36,8 @@ export default class Routing {
         // Get all form
         let formData = document.querySelector('[id*="form_container"]');
 
-        if(typeof path == "string") {
+        if(typeof path === "string") {
             route = path;
-
-            // TODO refactor
-            if (route === 'login_form') {
-                this.getForm(formData).then((result) => {
-                    if (result != null && result !== "Failed") {
-                        FormHelper.getLoginFormValue(result)
-                    } else {
-                        console.log("Une erreur est survenue")
-                    }
-                });
-            } else if (route === 'signup_form') {
-                this.getForm(formData).then((result) => {
-                    if (result != null && result !== "Failed") {
-                        SignupController.signupUser(FormHelper.getSignUpFormValue(result))
-                    } else {
-                        console.log("Une erreur est survenue")
-                    }
-                });
-            }
         } else {
             window.location.pathname.replace(config.rootUrl + "/", '');
         }
@@ -61,19 +48,40 @@ export default class Routing {
         // Find the asked view
         let view = null;
         if (route === "" || route === "home" || route === "index" || route === "index.html") {
-            Controller.doController('home')
-        } else if (route === "login") {
-            Controller.doController('login')
+            HomeController.get();
         } else if (route === "reservation") {
-            Controller.doController('reservation')
-        } else if (route === "signup") {
-            Controller.doController('signup')
+            ReservationController.get();
+        } else if (route === "login") {
+            LoginController.get();
         } else if (route === "login_form") {
-            Controller.doController('login_form')
+            this.getForm(formData).then((result) => {
+                if (result != null && result !== "Failed") {
+                    console.log("result",result)
+                    LoginController.post(FormHelper.getLoginFormValue(result));
+                } else {
+                    console.log("Une erreur est survenue")
+                }
+            });
+        } else if (route === "signup") {
+            SignupController.get();
         } else if (route === "signup_form") {
-            Controller.doController('signup_form')
+            this.getForm(formData).then((result) => {
+                if (result != null && result !== "Failed") {
+                    console.log("result",result)
+                    SignupController.post(FormHelper.getSignUpFormValue(result))
+                } else {
+                    console.log("Une erreur est survenue")
+                }
+            });
+        } else if (route === "logout") {
+            LogoutController.get();
         } else {
-            Controller.doController('error404')
+            Error404Controller.get();
         }
+    }
+
+    static setRouteCallback(e) {
+        let routePath = e.target.routePath;
+        Routing.route(routePath);
     }
 }

@@ -5,7 +5,8 @@ import Manager from "../manager.js";
  * Model User
  */
 export default class User extends Manager {
-    constructor(name) {
+
+    constructor(last_name, first_name, email, password) {
         super();
         this.table = "User"
 
@@ -13,7 +14,10 @@ export default class User extends Manager {
         this.id = undefined;
 
         // Set fields
-        this.name = name;
+        this.last_name = last_name;
+        this.first_name = first_name;
+        this.email = email;
+        this.password = password;
     }
 
     getId() {
@@ -34,8 +38,17 @@ export default class User extends Manager {
     }
 
     // Override
+    filter(filters) {
+        return super.filter(this.table, filters);
+    }
+
+    // Override
     save() {
-        let user = {'name': this.name};
+        let user = {};
+        user['last_name'] = this.last_name;
+        user['first_name'] = this.first_name;
+        user['email'] = this.email;
+        user['password'] = this.password;
         super.save(this.table, user);
     }
 }
