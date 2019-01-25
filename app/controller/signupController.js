@@ -1,19 +1,19 @@
 import {signup} from "../view/signup.js"
 import User from "../model/models/user.js";
 import Templating from "../templating/templating.js";
+import Routing from "../routing/routing.js";
 
 export class SignupController {
 
     static get() {
         // Render View
         let events = {};
-        events['signup_form'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'signup_form'};
+        events['signup_form'] = {'type': 'click', 'callback': Routing.setRouteCallback, 'path': 'signup_form'};
         return Templating.render(signup(), {}, events);
     }
 
     static post(formUser) {
-        let user = new User();
-        user.setName(formUser.username);
+        let user = new User(formUser.last_name, formUser.first_name, formUser.email, formUser.password);
         user.save();
     }
 }

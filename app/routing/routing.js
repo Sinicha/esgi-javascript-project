@@ -6,6 +6,8 @@ import {HomeController} from "../controller/homeController.js";
 import {LoginController} from "../controller/loginController.js";
 import {ReservationController} from "../controller/reservationController.js";
 import {Error404Controller} from "../controller/error404Controller.js";
+import AuthenticationHelper from "../helper/AuthenticationHelper.js";
+import {LogoutController} from "../controller/logoutController.js";
 
 /**
  * This class use for routing
@@ -36,25 +38,6 @@ export default class Routing {
 
         if(typeof path == "string") {
             route = path;
-
-            // TODO refactor
-            if (route === 'login_form') {
-                this.getForm(formData).then((result) => {
-                    if (result != null && result !== "Failed") {
-                        FormHelper.getLoginFormValue(result)
-                    } else {
-                        console.log("Une erreur est survenue")
-                    }
-                });
-            } else if (route === 'signup_form') {
-                this.getForm(formData).then((result) => {
-                    if (result != null && result !== "Failed") {
-                        SignupController.signupUser(FormHelper.getSignUpFormValue(result))
-                    } else {
-                        console.log("Une erreur est survenue")
-                    }
-                });
-            }
         } else {
             window.location.pathname.replace(config.rootUrl + "/", '');
         }
@@ -69,23 +52,44 @@ export default class Routing {
         let view = null;
         if (route === "" || route === "home" || route === "index" || route === "index.html") {
             HomeController.get();
-        } else if (route === "login") {
-            LoginController.get();
         } else if (route === "reservation") {
             ReservationController.get();
+        } else if (route === "login") {
+            LoginController.get();
+        } else if (route === "login_form") {
+            this.getForm(formData).then((result) => {
+                if (result != null && result !== "Failed") {
+                    console.log("result",result)
+                    LoginController.post(FormHelper.getLoginFormValue(result));
+                } else {
+                    console.log("Une erreur est survenue")
+                }
+            });
         } else if (route === "signup") {
             SignupController.get();
-        } else if (route === "login_form") {
-            LoginController.get();
         } else if (route === "signup_form") {
-            HomeController.get();
+            this.getForm(formData).then((result) => {
+                if (result != null && result !== "Failed") {
+                    console.log("result",result)
+                    SignupController.post(FormHelper.getSignUpFormValue(result))
+                } else {
+                    console.log("Une erreur est survenue")
+                }
+            });
+        } else if (route === "logout") {
+            LogoutController.get();
         } else {
             Error404Controller.get();
         }
     }
 
     static createMenu() {
-        let view = "<nav><ul><li><button id='home'>Accueil</button></li><li><button id='reservation'>Reservation</button></li><li><button id='login'>Login</button></li><li><button id='signup'>Inscription</button></li></ul></ul></nav>";
+        let view = "";
+        if(!AuthenticationHelper.getAuthenticate()) {
+            view = "<nav><ul><li><button id='home'>Accueil</button></li><li><button id='reservation'>Reservation</button></li><li><button id='login'>Login</button></li><li><button id='signup'>Inscription</button></li></ul></ul></nav>";
+        } else {
+            view = "<nav><ul><li><button id='home'>Accueil</button></li><li><button id='reservation'>Reservation</button></li><li><button id='profile'>Profile</button></li><li><button id='logout'>Déconnexion</button></li></ul></ul></nav>";
+        }
         let vars = {};
         let events = {};
 
@@ -94,6 +98,7 @@ export default class Routing {
         events['login'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login'};
         events['reservation'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'reservation'};
         events['signup'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'signup'};
+        events['logout'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'logout'};
         Templating.render(view, vars, events);
     }
 

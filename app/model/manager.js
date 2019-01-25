@@ -83,7 +83,6 @@ export default class Manager {
                 // Search and add resultat find to array
                 for (let k in filters) {
                     for (let i = 0; i < pEntries.length; i++) {
-
                         switch (filters[k]['op']) {
                             case '<': {
                                 if (pEntries[i][k] < filters[k]['value']) {

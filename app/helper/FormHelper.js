@@ -12,11 +12,9 @@ export default class FormHelper {
 
         for (let element in getValueForm) {
             if (element == null) {
-                console.error("L'élément du form ", element, " est vide")
+                console.error("L'élément du form ", element, " est vide.")
             }
         }
-
-        console.log("Form", getValueForm);
 
         return getValueForm;
     }

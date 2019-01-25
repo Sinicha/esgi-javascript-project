@@ -6,15 +6,15 @@ export default class AuthenticationHelper {
     constructor() {
     }
 
-    getAuthenticate() {
-        return sessionStorage.getItem('authenticate');
+    static getAuthenticate() {
+        return (sessionStorage.getItem('authenticate') == "true");
     }
 
-    setAuthenticate(user) {
-        sessionStorage.setItem('authenticate', user);
+    static setAuthenticate(bool) {
+        sessionStorage.setItem('authenticate', bool);
     }
 
-    logout() {
+    static logout() {
         sessionStorage.removeItem('authenticate');
     }
 }
