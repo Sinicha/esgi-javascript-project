@@ -1,12 +1,10 @@
 import {config} from "../configuration/config.js";
 import FormHelper from "../helper/FormHelper.js";
 import {SignupController} from "../controller/signupController.js";
-import Templating from "../templating/templating.js";
 import {HomeController} from "../controller/homeController.js";
 import {LoginController} from "../controller/loginController.js";
 import {ReservationController} from "../controller/reservationController.js";
 import {Error404Controller} from "../controller/error404Controller.js";
-import AuthenticationHelper from "../helper/AuthenticationHelper.js";
 import {LogoutController} from "../controller/logoutController.js";
 
 /**

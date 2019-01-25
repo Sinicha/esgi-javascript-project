@@ -17,7 +17,11 @@ export class SignupController {
     }
 
     static post(formUser) {
+        // Create User
         let user = new User(formUser.last_name, formUser.first_name, formUser.email, formUser.password);
         user.save();
+
+        // Redirect
+        Routing.route('login');
     }
 }

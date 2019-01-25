@@ -9,18 +9,11 @@ export default class Templating {
 
     static render(content, vars, events) {
         // Replace variable
-        if (vars !== null && typeof vars === 'object') {
-            for (let k in vars) {
-                if (vars.hasOwnProperty(k)) {
-                    let searchElement = '{{' + k + '}}';
-                    content = content.replace(searchElement, vars[k]);
-                }
-            }
-        }
+        let itpContent = this.interpolate(content, vars);
 
         // Create DOM Element
         let template = document.createElement('template');
-        template.innerHTML = content;
+        template.innerHTML = itpContent;
 
         // Add to root in DOM
         document.getElementById("root").appendChild(template.content);
@@ -44,5 +37,17 @@ export default class Templating {
                 }
             }
         }
+    }
+
+    static interpolate(content, vars) {
+        if (vars !== null && typeof vars === 'object') {
+            for (let k in vars) {
+                if (vars.hasOwnProperty(k)) {
+                    let searchElement = '{{' + k + '}}';
+                    content = content.replace(searchElement, vars[k]);
+                }
+            }
+        }
+        return content;
     }
 }
