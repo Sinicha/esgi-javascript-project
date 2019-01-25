@@ -12,7 +12,7 @@ export default class Templating {
         if (vars != null && typeof vars == 'object') {
             for (let k in vars) {
                 if (vars.hasOwnProperty(k)) {
-                    let searchElement = '${' + k + '}';
+                    let searchElement = '{{' + k + '}}';
                     content = content.replace(searchElement, vars[k]);
                 }
             }

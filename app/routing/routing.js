@@ -1,7 +1,11 @@
-import Controller from "../controller/controller.js";
 import {config} from "../configuration/config.js";
 import FormHelper from "../helper/FormHelper.js";
-import {SignupController} from "../controller/controllers/signupController.js";
+import {SignupController} from "../controller/signupController.js";
+import Templating from "../templating/templating.js";
+import {HomeController} from "../controller/homeController.js";
+import {LoginController} from "../controller/loginController.js";
+import {ReservationController} from "../controller/reservationController.js";
+import {Error404Controller} from "../controller/error404Controller.js";
 
 /**
  * This class use for routing
@@ -58,22 +62,43 @@ export default class Routing {
         // Clear Root in Dom
         document.getElementById('root').innerHTML = "";
 
+        // Create menu bar
+        this.createMenu();
+
         // Find the asked view
         let view = null;
         if (route === "" || route === "home" || route === "index" || route === "index.html") {
-            Controller.doController('home')
+            HomeController.get();
         } else if (route === "login") {
-            Controller.doController('login')
+            LoginController.get();
         } else if (route === "reservation") {
-            Controller.doController('reservation')
+            ReservationController.get();
         } else if (route === "signup") {
-            Controller.doController('signup')
+            SignupController.get();
         } else if (route === "login_form") {
-            Controller.doController('login_form')
+            LoginController.get();
         } else if (route === "signup_form") {
-            Controller.doController('signup_form')
+            HomeController.get();
         } else {
-            Controller.doController('error404')
+            Error404Controller.get();
         }
+    }
+
+    static createMenu() {
+        let view = "<nav><ul><li><button id='home'>Accueil</button></li><li><button id='reservation'>Reservation</button></li><li><button id='login'>Login</button></li><li><button id='signup'>Inscription</button></li></ul></ul></nav>";
+        let vars = {};
+        let events = {};
+
+        // Render Menu
+        events['home'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'home'};
+        events['login'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'login'};
+        events['reservation'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'reservation'};
+        events['signup'] = {'type': 'click', 'callback': this.setRouteCallback, 'path': 'signup'};
+        Templating.render(view, vars, events);
+    }
+
+    static setRouteCallback(e) {
+        let routePath = e.target.routePath;
+        Routing.route(routePath);
     }
 }
