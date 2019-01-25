@@ -11,7 +11,7 @@ export default class FormHelper {
         };
 
         for (let element in getValueForm) {
-            if (element == null) {
+            if (element === null) {
                 console.error("L'élément du form ", element, " est vide.")
             }
         }
@@ -28,7 +28,7 @@ export default class FormHelper {
         };
 
         for (let element in getValueForm) {
-            if (element == null) {
+            if (element === null) {
                 console.error("L'élément du form ", element, " est vide")
             }
         }

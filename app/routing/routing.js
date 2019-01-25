@@ -36,7 +36,7 @@ export default class Routing {
         // Get all form
         let formData = document.querySelector('[id*="form_container"]');
 
-        if(typeof path == "string") {
+        if(typeof path === "string") {
             route = path;
         } else {
             window.location.pathname.replace(config.rootUrl + "/", '');

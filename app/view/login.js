@@ -1,6 +1,6 @@
 export function login(pError) {
     let error = "";
-    if(typeof pError == 'string') {
+    if(typeof pError === 'string') {
         error = `<div>` + pError + `</div>`;
     }
     return `

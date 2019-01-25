@@ -14,7 +14,7 @@ export default class Manager {
      */
     lastId(table) {
         let lastId = localStorage.getItem("db." + table.toLowerCase() + ".lastid");
-        if (lastId == null) {
+        if (lastId === null) {
             localStorage.setItem("db." + table.toLowerCase() + ".lastid", '0');
             return 0;
         }
@@ -29,7 +29,7 @@ export default class Manager {
      */
     incrementId(table) {
         let lastId = localStorage.getItem("db." + table.toLowerCase() + ".lastid");
-        if (lastId == null || parseInt(lastId) < 1) {
+        if (lastId === null || parseInt(lastId) < 1) {
             localStorage.setItem("db." + table.toLowerCase() + ".lastid", '1');
             return 1;
         } else {
@@ -53,7 +53,7 @@ export default class Manager {
             let pEntries = JSON.parse(entries);
             if (Array.isArray(pEntries)) {
                 for (let i = 0; i < pEntries.length; i++) {
-                    if (pEntries[i]['id'] == id) {
+                    if (pEntries[i]['id'] === id) {
                         return pEntries[i];
                     }
                 }
@@ -136,7 +136,7 @@ export default class Manager {
 
             // Delete duplicate object found
             results = results.filter((elem, pos, arr) => {
-                return arr.indexOf(elem) == pos;
+                return arr.indexOf(elem) === pos;
             });
 
             return results;
@@ -181,7 +181,7 @@ export default class Manager {
 
         let entries = localStorage.getItem("db." + table.toLowerCase() + ".entries");
         let arrayData = null;
-        if (entries == null) {
+        if (entries === null) {
             arrayData = [];
             arrayData.push(object);
         } else {

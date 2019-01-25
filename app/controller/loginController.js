@@ -15,9 +15,8 @@ export class LoginController {
 
     static post(formLogin) {
         let user = (new User()).filter({'email': {'op': '==', 'value': formLogin.email}});
-        if(user != null && Array.isArray(user) && user.length == 1 && user[0]['password'] == formLogin.password) {
+        if(user !== null && Array.isArray(user) && user.length === 1 && user[0]['password'] === formLogin.password) {
             AuthenticationHelper.setAuthenticate(true);
-            AuthenticationHelper.getAuthenticate();
         } else {
             let events = {};
             events['login_form'] = {'type': 'click', 'callback': Routing.setRouteCallback, 'path': 'login_form'};

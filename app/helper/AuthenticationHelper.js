@@ -7,7 +7,7 @@ export default class AuthenticationHelper {
     }
 
     static getAuthenticate() {
-        return (sessionStorage.getItem('authenticate') == "true");
+        return (sessionStorage.getItem('authenticate') === "true");
     }
 
     static setAuthenticate(bool) {

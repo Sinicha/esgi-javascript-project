@@ -9,7 +9,7 @@ export default class Templating {
 
     static render(content, vars, events) {
         // Replace variable
-        if (vars != null && typeof vars == 'object') {
+        if (vars !== null && typeof vars === 'object') {
             for (let k in vars) {
                 if (vars.hasOwnProperty(k)) {
                     let searchElement = '{{' + k + '}}';
@@ -26,11 +26,11 @@ export default class Templating {
         document.getElementById("root").appendChild(template.content);
 
         // Set events
-        if (events != null && typeof events == 'object') {
+        if (events !== null && typeof events === 'object') {
             for (let k in events) {
                 if (events.hasOwnProperty(k)) {
                     let obj = events[k];
-                    if (obj != null && typeof obj == 'object') {
+                    if (obj !== null && typeof obj === 'object') {
                         if (obj.hasOwnProperty('type')
                             && obj.hasOwnProperty('callback')
                             && obj.hasOwnProperty('path')) {
