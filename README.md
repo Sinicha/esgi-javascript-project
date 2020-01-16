@@ -5,12 +5,18 @@ Hi! This is a student project for Javascript
 
 # Pre-request
 
-A recent browser that support ECMAScript 2015 (ES6).
+- docker
+- docker-compose
+- A browser that support ECMAScript 2015 (ES6)
  
 
 # Lunch the project
 
-You just need to open "index.html" file.
+To build the docker stack, use this command : 
+
+    docker-compose up -d --build
+
+Then, access to localhost:8000 (default port) with your browser.
 
 
 # Goal
@@ -21,4 +27,3 @@ On the agent side, they will be able to share room management.
 During the parties in the premises, players will trigger sensors in their advanced or not if they are blocked.
 Depending on that and the state of the game in time, the staff can trigger index sensors. 
 At the end of the game, a score can be created for the players.
-
