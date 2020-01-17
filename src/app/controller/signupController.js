@@ -3,6 +3,7 @@ import User from "../model/models/user.js";
 import Templating from "../templating/templating.js";
 import Routing from "../routing/routing.js";
 import {createMenu} from "../view/block/menu.js";
+import FormHelper from "../helper/FormHelper.js";
 
 export class SignupController {
 
@@ -16,12 +17,14 @@ export class SignupController {
         return Templating.render(signup(), {}, events);
     }
 
-    static post(formUser) {
+    static post(result) {
+        let formUser = FormHelper.getSignUpFormValue(result);
+
         // Create User
         let user = new User(formUser.last_name, formUser.first_name, formUser.email, formUser.password);
         user.save();
 
         // Redirect
-        Routing.route('login');
+        Routing.doRoute('login');
     }
 }

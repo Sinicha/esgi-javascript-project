@@ -13,6 +13,6 @@ export default class App {
     }
 
     async init() {
-        Routing.route();
+        Routing.doRoute();
     }
 }

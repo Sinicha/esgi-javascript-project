@@ -4,6 +4,7 @@ import Routing from "../routing/routing.js";
 import AuthenticationHelper from "../helper/AuthenticationHelper.js";
 import User from "../model/models/user.js";
 import {createMenu} from "../view/block/menu.js";
+import FormHelper from "../helper/FormHelper.js";
 
 export class LoginController {
 
@@ -17,11 +18,12 @@ export class LoginController {
         return Templating.render(login(), {}, events);
     }
 
-    static post(formLogin) {
+    static post(result) {
+        let formLogin = FormHelper.getLoginFormValue(result);
         let user = (new User()).filter({'email': {'op': '==', 'value': formLogin.email}});
         if(user !== null && Array.isArray(user) && user.length === 1 && user[0]['password'] === formLogin.password) {
             AuthenticationHelper.setAuthenticate(user[0]);
-            Routing.route('home');
+            Routing.doRoute('home');
         } else {
             // Create menu bar
             createMenu();
